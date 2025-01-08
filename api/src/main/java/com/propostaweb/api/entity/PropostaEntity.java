@@ -1,6 +1,7 @@
 package com.propostaweb.api.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 @Entity
 @Table(name = "proposta")
@@ -11,9 +12,65 @@ public class PropostaEntity {
     private Long id;
     private Double valorSolicitado;
     private Integer prazoPagamento;
+    private boolean aprovada;
     private boolean integrada;
     private String observacao;
     @OneToOne
     @JoinColumn(name = "id_usuario")
     private UsuarioEntity usuario;
+
+    public UsuarioEntity getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(UsuarioEntity usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getObservacao() {
+        return observacao;
+    }
+
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
+    }
+
+    public boolean isIntegrada() {
+        return integrada;
+    }
+
+    public void setIntegrada(boolean integrada) {
+        this.integrada = integrada;
+    }
+
+    public Integer getPrazoPagamento() {
+        return prazoPagamento;
+    }
+
+    public void setPrazoPagamento(Integer prazoPagamento) {
+        this.prazoPagamento = prazoPagamento;
+    }
+
+    public Double getValorSolicitado() {
+        return valorSolicitado;
+    }
+
+    public void setValorSolicitado(Double valorSolicitado) {
+        this.valorSolicitado = valorSolicitado;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+    public boolean getAprovada() {
+        return aprovada;
+    }
+
+    public void setAprovada(boolean aprovada) {
+        this.aprovada = aprovada;
+    }
 }
