@@ -1,7 +1,6 @@
 package com.propostaweb.api.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
 
 @Entity
 @Table(name = "proposta")
@@ -15,7 +14,7 @@ public class PropostaEntity {
     private boolean aprovada;
     private boolean integrada;
     private String observacao;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_usuario")
     private UsuarioEntity usuario;
 
