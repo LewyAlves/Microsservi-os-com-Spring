@@ -1,6 +1,7 @@
 package com.propostaweb.api.mapper;
 
 import com.propostaweb.api.dto.PropostaRequestDto;
+import com.propostaweb.api.dto.PropostaResponseDto;
 import com.propostaweb.api.entity.PropostaEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -20,4 +21,10 @@ public interface PropostaMapper {
     @Mapping(target = "observacao", ignore = true)
     PropostaEntity dtoToProposta(PropostaRequestDto request);
 
+    @Mapping(target = "nome", source = "usuario.nome")
+    @Mapping(target = "sobrenome", source = "usuario.sobrenome")
+    @Mapping(target = "telefone", source = "usuario.telefone")
+    @Mapping(target = "cpf", source = "usuario.cpf")
+    @Mapping(target = "renda", source = "usuario.renda")
+    PropostaResponseDto entityToResponse(PropostaEntity proposta);
 }
