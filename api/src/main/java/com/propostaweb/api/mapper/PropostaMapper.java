@@ -7,6 +7,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.springframework.data.domain.Page;
 
+import java.text.NumberFormat;
 import java.util.List;
 
 
@@ -29,9 +30,14 @@ public interface PropostaMapper {
     @Mapping(target = "telefone", source = "usuario.telefone")
     @Mapping(target = "cpf", source = "usuario.cpf")
     @Mapping(target = "renda", source = "usuario.renda")
+    @Mapping(target = "valorSolicitadoFmt", expression = "java(setValorSolicitadoFmt(proposta))")
     PropostaResponseDto entityToResponse(PropostaEntity proposta);
 
     default List<PropostaResponseDto> entityToList(List<PropostaEntity> entities) {
         return entities.stream().map(this::entityToResponse).toList();
+    }
+
+    default String setValorSolicitadoFmt(PropostaEntity entity){
+        return NumberFormat.getCurrencyInstance().format(entity.getValorSolicitado());
     }
 }

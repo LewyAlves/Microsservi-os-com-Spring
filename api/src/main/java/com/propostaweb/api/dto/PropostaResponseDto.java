@@ -6,7 +6,7 @@ public record PropostaResponseDto(Long id,
                                   String telefone,
                                   String cpf,
                                   Double renda,
-                                  Double valorSolicitado,
+                                  String valorSolicitadoFmt,
                                   Integer prazoPagamento,
                                   Boolean aprovado,
                                   String observacao
