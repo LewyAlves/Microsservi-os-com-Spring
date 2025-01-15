@@ -5,6 +5,9 @@ import com.propostaweb.api.dto.PropostaResponseDto;
 import com.propostaweb.api.entity.PropostaEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.springframework.data.domain.Page;
+
+import java.util.List;
 
 
 @Mapper(componentModel = "spring")
@@ -27,4 +30,8 @@ public interface PropostaMapper {
     @Mapping(target = "cpf", source = "usuario.cpf")
     @Mapping(target = "renda", source = "usuario.renda")
     PropostaResponseDto entityToResponse(PropostaEntity proposta);
+
+    default List<PropostaResponseDto> entityToList(List<PropostaEntity> entities) {
+        return entities.stream().map(this::entityToResponse).toList();
+    }
 }
