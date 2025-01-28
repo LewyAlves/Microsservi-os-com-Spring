@@ -29,12 +29,22 @@ public class PropostaService {
 
     public PropostaResponseDto criarProposta(PropostaRequestDto dto){
         PropostaEntity entity = propostaMapper.dtoToProposta(dto);
-        PropostaEntity entitySave = propostaRepository.save(entity);
+        propostaRepository.save(entity);
 
-        PropostaResponseDto response = propostaMapper.entityToResponse(entitySave);
-        notificacaoService.notificar(response,exchange);
+        PropostaResponseDto response = propostaMapper.entityToResponse(entity);
+
+        notificarRabbitMQ(entity);
 
         return response;
+    }
+
+    private void notificarRabbitMQ(PropostaEntity proposta){
+        try {
+            notificacaoService.notificar(proposta,exchange);
+        } catch (RuntimeException e){
+            proposta.setIntegrada(false);
+            propostaRepository.save(proposta);
+        }
     }
 
     public List<PropostaResponseDto> obterTodos() {
