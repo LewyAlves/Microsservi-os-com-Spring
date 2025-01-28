@@ -6,8 +6,7 @@ import com.propostaweb.api.entity.PropostaEntity;
 import com.propostaweb.api.mapper.PropostaMapper;
 import com.propostaweb.api.repository.PropostaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,13 +23,16 @@ public class PropostaService {
     @Autowired
     private NotificacaoService notificacaoService;
 
+    @Value("${rabbitmq.propostapendente.exchenge}")
+    private String exchange;
+
 
     public PropostaResponseDto criarProposta(PropostaRequestDto dto){
         PropostaEntity entity = propostaMapper.dtoToProposta(dto);
         PropostaEntity entitySave = propostaRepository.save(entity);
 
         PropostaResponseDto response = propostaMapper.entityToResponse(entitySave);
-        notificacaoService.notificar(response,"proposta-pendente.ex");
+        notificacaoService.notificar(response,exchange);
 
         return response;
     }
