@@ -21,12 +21,18 @@ public class PropostaService {
     @Autowired
     private PropostaMapper propostaMapper;
 
+    @Autowired
+    private NotificacaoService notificacaoService;
+
 
     public PropostaResponseDto criarProposta(PropostaRequestDto dto){
         PropostaEntity entity = propostaMapper.dtoToProposta(dto);
         PropostaEntity entitySave = propostaRepository.save(entity);
 
-        return propostaMapper.entityToResponse(entitySave);
+        PropostaResponseDto response = propostaMapper.entityToResponse(entitySave);
+        notificacaoService.notificar(response,"proposta-pendente.ex");
+
+        return response;
     }
 
     public List<PropostaResponseDto> obterTodos() {
