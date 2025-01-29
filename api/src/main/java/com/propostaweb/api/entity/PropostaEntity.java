@@ -1,5 +1,6 @@
 package com.propostaweb.api.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -16,6 +17,7 @@ public class PropostaEntity {
     private String observacao;
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_usuario")
+    @JsonManagedReference
     private UsuarioEntity usuario;
 
     public UsuarioEntity getUsuario() {

@@ -1,5 +1,6 @@
 package com.propostaweb.api.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -14,6 +15,7 @@ public class UsuarioEntity {
     private String telefone;
     private Double renda;
     @OneToOne(mappedBy = "usuario")
+    @JsonBackReference
     private PropostaEntity proposta;
 
     public Long getId() {
