@@ -1,12 +1,19 @@
 package com.micro.notificacao.service;
 
-import com.micro.notificacao.entity.PropostaEntity;
+import com.amazonaws.services.sns.AmazonSNS;
+import com.amazonaws.services.sns.model.PublishRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class NotificacaoSnsService {
 
-    public void  notificar(String mensagem){
+    @Autowired
+    private AmazonSNS amazonSNS;
 
+    public void  notificar(String mensagem, String telefone){
+        PublishRequest publishRequest = new PublishRequest().withMessage(mensagem).withPhoneNumber(telefone);
+        System.out.println(publishRequest);
+        amazonSNS.publish(publishRequest);
     }
 }
