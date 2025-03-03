@@ -8,7 +8,7 @@ public record PropostaResponseDto(Long id,
                                   Double renda,
                                   String valorSolicitadoFmt,
                                   Integer prazoPagamento,
-                                  Boolean aprovado,
+                                  Boolean aprovada,
                                   String observacao
 )
 {

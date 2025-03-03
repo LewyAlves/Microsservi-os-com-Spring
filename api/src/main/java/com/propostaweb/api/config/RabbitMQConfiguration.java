@@ -14,10 +14,10 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMQConfiguration {
 
-    @Value("${rabbitmq.propostapendente.exchenge}")
+    @Value("${rabbitmq.propostapendente.exchange}")
     private String exchangePropostaPendente;
 
-    @Value("${rabbitmq.propostaconcluida.exchenge}")
+    @Value("${rabbitmq.propostaconcluida.exchange}")
     private String exchangePropostaConcluida;
 
     @Bean
@@ -37,7 +37,7 @@ public class RabbitMQConfiguration {
 
     @Bean
     public Queue criarFilaPropostaConcluidaMsNotificacao(){
-        return QueueBuilder.durable("proposta-concluida.ms-analise-credito").build();
+        return QueueBuilder.durable("proposta-concluida.ms-notificacao").build();
     }
 
     @Bean
@@ -62,7 +62,7 @@ public class RabbitMQConfiguration {
 
     @Bean
     public Binding criarBindingPropostaPendenteMSAnaliseCredito(){
-        return BindingBuilder.bind(criarFilaPropostaPendenteMsNotificacao())
+        return BindingBuilder.bind(criarFilaPropostaPendenteMsAnaliseCredito())
                 .to(criarFanoutExchangePropostaPendente());
     }
 
@@ -80,10 +80,11 @@ public class RabbitMQConfiguration {
 
     @Bean
     public Binding criarBindingPropostaConcluidaMSNotificacao(){
-        return BindingBuilder.bind(criarFilaPropostaConcluidaMsProposta())
+        return BindingBuilder.bind(criarFilaPropostaConcluidaMsNotificacao())
                 .to(criarFanoutExchangePropostaConcluida());
     }
 
+    @Bean
     public Jackson2JsonMessageConverter jackson2JsonMessageConverter(){
         return new Jackson2JsonMessageConverter();
     }

@@ -23,7 +23,7 @@ public class PropostaService {
     @Autowired
     private NotificacaoService notificacaoService;
 
-    @Value("${rabbitmq.propostapendente.exchenge}")
+    @Value("${rabbitmq.propostapendente.exchange}")
     private String exchange;
 
 

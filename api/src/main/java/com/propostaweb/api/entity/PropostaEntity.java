@@ -12,8 +12,8 @@ public class PropostaEntity {
     private Long id;
     private Double valorSolicitado;
     private Integer prazoPagamento;
-    private boolean aprovada;
-    private boolean integrada;
+    private Boolean aprovada;
+    private Boolean integrada;
     private String observacao;
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_usuario")
@@ -40,7 +40,7 @@ public class PropostaEntity {
         return integrada;
     }
 
-    public void setIntegrada(boolean integrada) {
+    public void setIntegrada(Boolean integrada) {
         this.integrada = integrada;
     }
 
@@ -67,11 +67,11 @@ public class PropostaEntity {
     public void setId(Long id) {
         this.id = id;
     }
-    public boolean getAprovada() {
+    public Boolean getAprovada() {
         return aprovada;
     }
 
-    public void setAprovada(boolean aprovada) {
+    public void setAprovada(Boolean aprovada) {
         this.aprovada = aprovada;
     }
 }

@@ -22,7 +22,7 @@ public class PropostaSemIntegracao {
 
     private final Logger logger = Logger.getLogger(String.valueOf(PropostaSemIntegracao.class));
 
-    @Value("${rabbitmq.propostapendente.exchenge}")
+    @Value("${rabbitmq.propostapendente.exchange}")
     private String exchange;
 
     @Scheduled(fixedDelay = 10, timeUnit = TimeUnit.SECONDS)
