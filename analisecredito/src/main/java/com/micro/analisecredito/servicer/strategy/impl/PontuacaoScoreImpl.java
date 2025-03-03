@@ -1,5 +1,6 @@
 package com.micro.analisecredito.servicer.strategy.impl;
 
+import com.micro.analisecredito.constants.MensagemConstantes;
 import com.micro.analisecredito.entity.PropostaEntity;
 import com.micro.analisecredito.exceptions.StrategyException;
 import com.micro.analisecredito.servicer.strategy.CalculoPonto;
@@ -17,7 +18,7 @@ public class PontuacaoScoreImpl implements CalculoPonto {
         int score = score();
 
         if (score < 200){
-            throw new StrategyException("score abaixo");
+            throw new StrategyException(String.format(MensagemConstantes.PONTUACAO_SERASA_BAIXA, proposta.getUsuario().getNome()));
         } else if (score <= 400) {
             return 180;
         } else {

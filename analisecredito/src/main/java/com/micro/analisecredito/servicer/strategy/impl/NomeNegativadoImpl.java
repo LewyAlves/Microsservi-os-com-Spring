@@ -1,5 +1,6 @@
 package com.micro.analisecredito.servicer.strategy.impl;
 
+import com.micro.analisecredito.constants.MensagemConstantes;
 import com.micro.analisecredito.entity.PropostaEntity;
 import com.micro.analisecredito.exceptions.StrategyException;
 import com.micro.analisecredito.servicer.strategy.CalculoPonto;
@@ -15,7 +16,7 @@ public class NomeNegativadoImpl implements CalculoPonto {
     @Override
     public int calcular(PropostaEntity proposta) {
         if (nomeNegativado()){
-            throw new StrategyException("Nome negativado");
+            throw new StrategyException(String.format(MensagemConstantes.CLIENTE_NEGATIVADO, proposta.getUsuario().getNome()));
         }
         return 100;
     }
